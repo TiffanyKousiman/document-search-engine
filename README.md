@@ -54,7 +54,7 @@ With an aim to enhance the performance of information retrieval, the Rocchio Alg
 
 The model design is as follows:
 
-![Rocchio Model](rocchio_model.png)
+![Rocchio Model](img/rocchio_model.png)
 
 
 **Key steps performed in the Rocchio model:**
@@ -63,15 +63,15 @@ The model design is as follows:
 2. Create pseudo-relevance feedback and term vocabulary based on relevant document set (top-10 documents).
 3. Perform Rocchio query expansion and get the expanded query using the top 50 terms of the highest average weights.
     $$
-    q'_j = \alpha \cdot q_j + \beta \cdot \frac{1}{|Rel|} \sum_{D_i \in Rel} d_{ij} 
-    - \gamma \cdot \frac{1}{|Nonrel|} \sum_{D_i \in Nonrel} d_{ij}
+        q'_j = \alpha \cdot q_j + \beta \cdot \frac{1}{|Rel|} \sum_{D_i \in Rel} d_{ij} 
+        - \gamma \cdot \frac{1}{|Nonrel|} \sum_{D_i \in Nonrel} d_{ij}
     $$
     where $d_{ij}$ is the TF-IDF weight of term $j$ in document $i$, $Rel$ is the relevant documents, $Nonrel$ is the non-relevant documents.
 4. Re-run the TF-IDF IR model with the new query terms and weights (**Second-Pass Retrieval**).
 5. Label the top 12 documents as relevant (`1`) and remaining as non-relevant (`0`) (**Document Retrieval**).
 
 
-![query terms](image.png)
+![query terms](img/image.png)
 
 The chart above presents the expanded query from rocchio algorithm for the initial query vector of Dataset 109: {'child':1, 'custodi':1, 'case':1}, indicating that the relevant documents have encapsulated more important terms than the original query in fulfilling information needs, with the term ***'boy'*** being the most important while the terms ***'custodi'*** and ***'case'*** were voted out of the top 50 terms.
 

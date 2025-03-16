@@ -52,8 +52,6 @@ where $Q$ is the title of the long query, $k_1$ = 1.2, $k_2$ = 500, $b$ = 0.75, 
 
 With an aim to enhance the performance of information retrieval, the Rocchio Algorithm, a query expansion technique, is employed to modify and expand the initial queries based on pseudo-relevance feedback. After analyzing the query components provided in queries.txt, it was determined that the query title encapsulates the most important and meaningful information. While the description defines relevance and irrelevance, it poses a challenge to identify which sentences should be included in the query term indexing. Since the queries are relatively short, query reformulation through expansion can be beneficial. This process involves augmenting the original query with new terms and eliminating noisy terms based on the top-ranked documents obtained from the pseudo-relevance feedback, resulting in a collection of highly informative terms.
 
-The model design is as follows:
-
 ![Rocchio Model](img/rocchio_model.png)
 
 
@@ -63,7 +61,9 @@ The model design is as follows:
 2. Create pseudo-relevance feedback and term vocabulary based on relevant document set (top-10 documents).
 3. Perform Rocchio query expansion and get the expanded query using the top 50 terms of the highest average weights.
 
-    $$q'_j = \alpha \cdot q_j + \beta \cdot \frac{1}{|Rel|} \sum_{D_i \in Rel} d_{ij} - \gamma \cdot \frac{1}{|Nonrel|} \sum_{D_i \in Nonrel} d_{ij}$$
+    $$
+    q'_j = \alpha \cdot q_j + \beta \cdot \frac{1}{|Rel|} \sum_{D_i \in Rel} d_{ij} - \gamma \cdot \frac{1}{|Nonrel|} \sum_{D_i \in Nonrel} d_{ij}
+    $$
     
     where $d_{ij}$ is the TF-IDF weight of term $j$ in document $i$, $Rel$ is the relevant documents, $Nonrel$ is the non-relevant documents.
 4. Re-run the TF-IDF IR model with the new query terms and weights (**Second-Pass Retrieval**).
@@ -102,7 +102,7 @@ The table demonstrates that both devised models substantially outperform the bas
 
 ### Statistical Significance Analysis
 
-To determine meaningful differences between the models, paired t-tests were conducted with an alpha threshold of 0.1.
+To determine meaningful differences between the models, paired t-tests were conducted with an alpha $\alpha$ threshold of 0.1.
 
 | Metrics    | Baseline vs Model 1    | Baseline vs Model 2   | Model 1 vs Model 2    | 
 |--------------|--------------|--------------|--------------|

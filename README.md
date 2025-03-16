@@ -61,10 +61,9 @@ With an aim to enhance the performance of information retrieval, the Rocchio Alg
 2. Create pseudo-relevance feedback and term vocabulary based on relevant document set (top-10 documents).
 3. Perform Rocchio query expansion and get the expanded query using the top 50 terms of the highest average weights.
 
-$$
-    q'_j = \alpha \cdot q_j + \beta \cdot \frac{1}{|Rel|} \sum_{D_i \in Rel} d_{ij} - \gamma \cdot \frac{1}{|Nonrel|} \sum_{D_i \in Nonrel} d_{ij}
-$$ 
-where $d_{ij}$ is the TF-IDF weight of term $j$ in document $i$, $Rel$ is the relevant documents, $Nonrel$ is the non-relevant documents.
+    ![new query weight](img/new_query_weight.png)
+
+    where $d_{ij}$ is the TF-IDF weight of term $j$ in document $i$, $Rel$ is the relevant documents, $Nonrel$ is the non-relevant documents.
 
 4. Re-run the TF-IDF IR model with the new query terms and weights (**Second-Pass Retrieval**).
 5. Label the top 12 documents as relevant (`1`) and remaining as non-relevant (`0`) (**Document Retrieval**).
